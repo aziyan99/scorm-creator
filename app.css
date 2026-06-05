@@ -1,0 +1,10 @@
+/* Minimal Creator Workspace Styles helper */
+.resizer {
+  cursor: col-resize;
+  user-select: none;
+}
+
+.resizer-h {
+  cursor: row-resize;
+  user-select: none;
+}
