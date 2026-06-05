@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCORM Packager & Course Creator</title>
+  <!-- Tailwind CSS v4 Browser CDN -->
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <!-- Load JSZip for client-side packaging -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" referrerpolicy="no-referrer"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.08);
+      border-radius: 3px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.16);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-700 h-screen overflow-hidden">
+  <div class="app-container grid h-screen" style="grid-template-columns: 320px 6px 1fr 6px 450px;">
+    
+    <!-- LEFT PANEL: Configuration -->
+    <aside class="left-panel bg-white border-r border-slate-200/80 flex flex-col h-full overflow-hidden">
+      <div class="brand p-6 border-b border-slate-200/80 bg-white">
+        <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+          <svg class="text-indigo-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m16 6 4 14"/>
+            <path d="M12 6v14"/>
+            <path d="M8 8v12"/>
+            <path d="M4 4v16"/>
+          </svg>
+          <span class="bg-gradient-to-r from-indigo-600 to-emerald-600 bg-clip-text text-transparent">SCORM Creator</span>
+        </h2>
+      </div>
+
+      <div class="settings-section flex-grow p-6 flex flex-col gap-4 overflow-y-auto custom-scrollbar">
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider" for="course-title">Course Title</label>
+          <input class="bg-white border border-slate-200 rounded-lg text-slate-800 px-3 py-2 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all" type="text" id="course-title" placeholder="E.g., Cybersecurity 101">
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider" for="course-id">Course Identifier (ID)</label>
+          <input class="bg-white border border-slate-200 rounded-lg text-slate-800 px-3 py-2 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all" type="text" id="course-id" placeholder="E.g., COURSE_CYBER_101">
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider" for="course-desc">Description</label>
+          <textarea class="bg-white border border-slate-200 rounded-lg text-slate-800 px-3 py-2 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all resize-none" id="course-desc" rows="2" placeholder="Brief summary..."></textarea>
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider" for="course-passing">Passing Score (%)</label>
+          <input class="bg-white border border-slate-200 rounded-lg text-slate-800 px-3 py-2 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all" type="number" id="course-passing" min="0" max="100" value="80">
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider" for="course-version">Default SCORM Version</label>
+          <select class="bg-white border border-slate-200 rounded-lg text-slate-800 px-3 py-2 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all" id="course-version">
+            <option value="1.2">SCORM 1.2</option>
+            <option value="2004">SCORM 2004 (4th Ed)</option>
+          </select>
+        </div>
+
+        <!-- SCORM THEME CONFIGURATION -->
+        <div class="flex flex-col gap-1.5 border-t border-slate-100 pt-4 mt-1">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">SCORM Player Colors</span>
+          <div class="grid grid-cols-2 gap-2 mt-1">
+            <div class="flex flex-col gap-1">
+              <label class="text-[9px] text-slate-500 font-semibold" for="course-theme-bg">Primary Bg</label>
+              <input class="w-full h-8 bg-transparent border border-slate-200 rounded cursor-pointer p-0.5" type="color" id="course-theme-bg" value="#12141c">
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-[9px] text-slate-500 font-semibold" for="course-theme-sidebar">Sidebar Bg</label>
+              <input class="w-full h-8 bg-transparent border border-slate-200 rounded cursor-pointer p-0.5" type="color" id="course-theme-sidebar" value="#1a1d29">
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-[9px] text-slate-500 font-semibold" for="course-theme-text">Text Color</label>
+              <input class="w-full h-8 bg-transparent border border-slate-200 rounded cursor-pointer p-0.5" type="color" id="course-theme-text" value="#f3f4f6">
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-[9px] text-slate-500 font-semibold" for="course-theme-accent">Accent Color</label>
+              <input class="w-full h-8 bg-transparent border border-slate-200 rounded cursor-pointer p-0.5" type="color" id="course-theme-accent" value="#6366f1">
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-2">
+          <button id="btn-load-demo" class="w-full flex items-center justify-center gap-2 px-4 py-2 border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-600 rounded-lg text-xs font-semibold cursor-pointer transition-all">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5 4 4-11 11H4v-4Z"/><path d="m19 9-4-4"/></svg>
+            Load Sample Course
+          </button>
+        </div>
+      </div>
+
+      <div class="export-actions p-6 border-t border-slate-200/80 flex flex-col gap-2.5 bg-slate-50/50">
+        <button id="btn-export-12" class="w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-semibold cursor-pointer shadow-lg shadow-indigo-600/10 flex items-center justify-center gap-2 transition-all">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export SCORM 1.2 ZIP
+        </button>
+        <button id="btn-export-2004" class="w-full py-2.5 px-4 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 rounded-lg text-sm font-semibold cursor-pointer flex items-center justify-center gap-2 transition-all">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export SCORM 2004 ZIP
+        </button>
+      </div>
+    </aside>
+
+    <!-- LEFT RESIZER -->
+    <div class="resizer hover:bg-indigo-500 active:bg-indigo-600 cursor-col-resize z-50 transition-colors border-x border-slate-200/50 bg-slate-200/30" id="resizer-left"></div>
+
+    <!-- CENTER PANEL: Page Manager & Content Authoring -->
+    <main class="center-panel bg-slate-50 flex flex-col h-full overflow-hidden">
+      <div class="panel-header p-5 border-b border-slate-200/80 flex justify-between items-center bg-white">
+        <h3 class="text-sm font-semibold text-slate-800 tracking-wide">Course Builder Workspace</h3>
+      </div>
+
+      <div class="editor-workspace flex-grow grid grid-cols-[240px_1fr] overflow-hidden">
+        <!-- Sidebar Navigation Elements tree inside workspace -->
+        <div class="pages-tree bg-white border-r border-slate-200/80 flex flex-col overflow-hidden">
+          <div class="tree-header p-4 border-b border-slate-200/80 flex justify-between items-center bg-slate-50/50">
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Pages Outline</span>
+            <button id="btn-add-page" class="w-6 h-6 rounded-md bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold flex items-center justify-center cursor-pointer transition-all">+</button>
+          </div>
+          <ul id="pages-list" class="pages-list flex-grow overflow-y-auto p-3 flex flex-col gap-1 custom-scrollbar"></ul>
+        </div>
+
+        <!-- Main Body editor for blocks -->
+        <div class="flex flex-col overflow-hidden bg-slate-50/20">
+          <div id="editor-body" class="editor-body flex-grow overflow-y-auto p-8 flex flex-col gap-6 custom-scrollbar bg-slate-50"></div>
+          
+          <div class="editor-actions-bar p-5 border-t border-slate-200/80 bg-white flex gap-3 overflow-x-auto flex-nowrap custom-scrollbar">
+            <button id="btn-add-text" class="flex items-center gap-2 px-4 py-2 border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-600 rounded-lg text-xs font-semibold cursor-pointer transition-all shrink-0">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+              Add Text
+            </button>
+            <button id="btn-add-card" class="flex items-center gap-2 px-4 py-2 border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-600 rounded-lg text-xs font-semibold cursor-pointer transition-all shrink-0">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+              Add Flip Card
+            </button>
+            <button id="btn-add-accordion" class="flex items-center gap-2 px-4 py-2 border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-600 rounded-lg text-xs font-semibold cursor-pointer transition-all shrink-0">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+              Add Accordion
+            </button>
+            <button id="btn-add-tabs" class="flex items-center gap-2 px-4 py-2 border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-600 rounded-lg text-xs font-semibold cursor-pointer transition-all shrink-0">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="3" x2="8" y2="9"/><line x1="16" y1="3" x2="16" y2="9"/></svg>
+              Add Tabs
+            </button>
+            <button id="btn-add-hotspots" class="flex items-center gap-2 px-4 py-2 border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-600 rounded-lg text-xs font-semibold cursor-pointer transition-all shrink-0">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+              Add Hotspots
+            </button>
+            <button id="btn-add-quiz" class="flex items-center gap-2 px-4 py-2 border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-600 rounded-lg text-xs font-semibold cursor-pointer transition-all shrink-0">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              Add Quiz
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- RIGHT RESIZER -->
+    <div class="resizer hover:bg-indigo-500 active:bg-indigo-600 cursor-col-resize z-50 transition-colors border-x border-slate-200/50 bg-slate-200/30" id="resizer-right"></div>
+
+    <!-- RIGHT PANEL: Live Interactive Preview & SCORM API Debugger -->
+    <section class="preview-panel bg-slate-50 flex flex-col h-full overflow-hidden">
+      <div class="preview-header p-5 border-b border-slate-200/80 bg-white flex justify-between items-center">
+        <h3 class="text-sm font-semibold text-slate-800 tracking-wide">Live LMS Player Preview</h3>
+        <div class="flex gap-2">
+          <button id="btn-preview-popup" class="p-1.5 hover:bg-slate-100 border border-slate-200 rounded text-slate-500 hover:text-slate-700 cursor-pointer text-xs flex items-center gap-1 transition-all" title="Launch Player in Popup Window">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </button>
+          <button id="btn-preview-fullscreen" class="p-1.5 hover:bg-slate-100 border border-slate-200 rounded text-slate-500 hover:text-slate-700 cursor-pointer text-xs flex items-center gap-1 transition-all" title="Toggle Full Page Preview">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="iframe-container flex-grow bg-slate-100 relative">
+        <iframe id="preview-frame" class="w-full h-full border-none" title="SCORM Course Preview Frame"></iframe>
+      </div>
+
+      <!-- HORIZONTAL RESIZER -->
+      <div class="resizer-h hover:bg-indigo-500 active:bg-indigo-600 cursor-row-resize z-50 transition-colors border-y border-slate-200/50 bg-slate-200/30 h-1.5" id="resizer-console"></div>
+
+      <!-- Real-time developer SCORM logs -->
+      <div class="console-panel h-64 border-t border-slate-200/80 bg-white flex flex-col overflow-hidden">
+        <div class="console-header px-4 py-2 bg-slate-50 border-b border-slate-200/80 flex justify-between items-center">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">LMS Communication Logs (Real-time SCORM Calls)</span>
+          <button class="px-2 py-1 bg-slate-200 hover:bg-slate-300 text-slate-600 rounded text-[10px] font-semibold cursor-pointer transition-all" onclick="clearLogs()">Clear</button>
+        </div>
+        <div id="console-logs" class="console-logs flex-grow overflow-y-auto p-4 font-mono text-[11px] flex flex-col gap-1 custom-scrollbar bg-white text-slate-700"></div>
+      </div>
+    </section>
+
+  </div>
+
+  <script type="module">
+    import { initApp } from './app.js';
+  </script>
+</body>
+</html>
