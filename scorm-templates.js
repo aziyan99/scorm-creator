@@ -14,9 +14,9 @@ const DEFAULT_VISUAL_HOTSPOT_IMAGE = `data:image/svg+xml;charset=utf-8,` + encod
   <rect x="250" y="80" width="300" height="180" rx="8" fill="%231e293b" />
   
   <rect x="260" y="90" width="280" height="150" fill="%2338bdf8" rx="4" />
-  <text x="300" y="130" font-family="sans-serif" font-size="12" fill="%230f172a" font-weight="bold">DATABASE KEPENDUDUKAN</text>
-  <text x="300" y="150" font-family="sans-serif" font-size="10" fill="%23334155">Nama: Ahmad | NIK: 320102...</text>
-  <text x="300" y="170" font-family="sans-serif" font-size="10" fill="%23334155">Nama: Siti  | NIK: 320103...</text>
+  <text x="300" y="130" font-family="sans-serif" font-size="12" fill="%230f172a" font-weight="bold">DATABASE PELANGGAN</text>
+  <text x="300" y="150" font-family="sans-serif" font-size="10" fill="%23334155">Nama: Ahmad | ID: 320102...</text>
+  <text x="300" y="170" font-family="sans-serif" font-size="10" fill="%23334155">Nama: Siti  | ID: 320103...</text>
   <text x="300" y="210" font-family="sans-serif" font-size="11" fill="%23ef4444" font-weight="bold">\\u{1F513} SISTEM TERBUKA (BELUM DIKUNCI)</text>
 
   <rect x="300" y="330" width="200" height="15" rx="3" fill="%2364748b" />
@@ -26,7 +26,7 @@ const DEFAULT_VISUAL_HOTSPOT_IMAGE = `data:image/svg+xml;charset=utf-8,` + encod
   <text x="502" y="248" font-family="sans-serif" font-size="8" fill="%231e293b" font-weight="bold" transform="rotate(-5, 500, 220)">123456</text>
 
   <rect x="120" y="330" width="100" height="80" fill="%23ffffff" rx="4" transform="rotate(10, 120, 330)" stroke="%23cbd5e1" stroke-width="1" />
-  <text x="130" y="355" font-family="sans-serif" font-size="8" fill="%23475569" font-weight="bold" transform="rotate(10, 120, 330)">KARTU KELUARGA</text>
+  <text x="130" y="355" font-family="sans-serif" font-size="8" fill="%23475569" font-weight="bold" transform="rotate(10, 120, 330)">DOKUMEN RAHASIA</text>
   <line x1="130" y1="365" x2="200" y2="365" stroke="%2394a3b8" stroke-width="2" transform="rotate(10, 120, 330)" />
   <line x1="130" y1="375" x2="180" y2="375" stroke="%2394a3b8" stroke-width="2" transform="rotate(10, 120, 330)" />
   <line x1="130" y1="385" x2="190" y2="385" stroke="%2394a3b8" stroke-width="2" transform="rotate(10, 120, 330)" />
@@ -4198,7 +4198,7 @@ body {
   transform-style: preserve-3d;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.memory-card.flipped {
+.memory-card.flipped, .memory-card.matched {
   transform: rotateY(180deg);
 }
 .memory-card.matched {
