@@ -369,7 +369,7 @@ function loadDemoData() {
             safeLabel: 'Aman (Safe)',
             vulnerableLabel: 'Kerawanan (Vulnerable)',
             messages: [
-              { sender: 'them', text: 'Selamat siang Bapak/Ibu staf desa, berikut daftar warga penerima bantuan sosial kependudukan terbaru dari Kemenkes. Mohon segera dipasang aplikasinya ya.' },
+              { sender: 'them', text: 'Selamat siang Bapak/Ibu karyawan, berikut daftar warga penerima bantuan sosial kependudukan terbaru dari Kemenkes. Mohon segera dipasang aplikasinya ya.' },
               { sender: 'them', text: 'daftar_penerima_bansos.apk', isAttachment: true, attachmentType: 'apk' }
             ],
             choices: [
@@ -392,10 +392,10 @@ function loadDemoData() {
             successLabel: '🎉 Luar biasa! Anda berhasil menemukan seluruh {total} kerawanan keamanan fisik dan digital pada gambar ini!',
             identifiedLabel: 'Teridentifikasi',
             hazards: [
-              { id: 'sticky', name: 'Catatan Password di Monitor', description: 'Menempelkan password secara terbuka memudahkan orang lain membajak akun dinas Anda.', x: 65.31, y: 53.33 },
+              { id: 'sticky', name: 'Catatan Password di Monitor', description: 'Menempelkan password secara terbuka memudahkan orang lain membajak akun Anda.', x: 65.31, y: 53.33 },
               { id: 'unlocked', name: 'Layar Komputer Tidak Terkunci', description: 'Biasakan menekan tombol Win + L saat meninggalkan meja kerja agar tidak diakses orang asing.', x: 50.00, y: 36.67 },
               { id: 'usb', name: 'USB Flashdisk Asing Tercolok', description: 'Mencolokkan flashdisk sembarangan berisiko menyebarkan virus atau malware mata-mata.', x: 71.88, y: 76.89 },
-              { id: 'papers', name: 'Dokumen NIK Warga Terbuka', description: 'Dokumen kertas berisi NIK warga harus dirapikan dan disimpan di laci terkunci agar tidak disalahgunakan.', x: 21.25, y: 82.22 }
+              { id: 'papers', name: 'Dokumen NIK Terbuka', description: 'Dokumen kertas berisi NIK harus dirapikan dan disimpan di laci terkunci agar tidak disalahgunakan.', x: 21.25, y: 82.22 }
             ]
           }
         ]
@@ -1942,10 +1942,10 @@ function addBlock(type) {
   } else if (type === 'chat') {
     page.blocks.push({
       type: 'chat',
-      senderName: 'Dinas Sosial',
+      senderName: 'Layanan Umum',
       messages: [
-        { sender: 'them', text: 'Selamat siang Bapak/Ibu, ini file daftar penerima bansos terbaru untuk desa Bapak/Ibu. Silakan diinstal ya.' },
-        { sender: 'them', text: 'penerima_bansos_desa.apk', isAttachment: true, attachmentType: 'apk' }
+        { sender: 'them', text: 'Selamat siang Bapak/Ibu, ini file rincian tagihan listrik bulan ini. Silakan diinstal ya.' },
+        { sender: 'them', text: 'tagihan_listrik.apk', isAttachment: true, attachmentType: 'apk' }
       ],
       choices: [
         { text: 'Klik dan pasang file APK tersebut', feedback: 'Vulnerable! File APK dari nomor tak dikenal sering kali merupakan malware pencuri data/SMS/OTP.', isCorrect: false },
@@ -1955,20 +1955,20 @@ function addBlock(type) {
   } else if (type === 'passwordMeter') {
     page.blocks.push({
       type: 'passwordMeter',
-      title: 'Uji Kekuatan Password Desa Anda',
+      title: 'Uji Kekuatan Password Anda',
       description: 'Ketikkan password tiruan di bawah ini untuk melihat penilaian indikator kekuatannya.'
     });
   } else if (type === 'visualHotspot') {
     page.blocks.push({
       type: 'visualHotspot',
-      title: 'Cari Risiko Keamanan di Kantor Desa (Spot the Mistake)',
+      title: 'Cari Risiko Keamanan (Spot the Mistake)',
       description: 'Klik pada area yang tidak aman pada meja kerja di bawah ini.',
       imageUrl: '',
       hazards: [
-        { id: 'sticky', name: 'Catatan Password di Monitor', description: 'Menempelkan password secara terbuka memudahkan orang lain membajak akun dinas Anda.', x: 65.31, y: 53.33 },
+        { id: 'sticky', name: 'Catatan Password di Monitor', description: 'Menempelkan password secara terbuka memudahkan orang lain membajak akun Anda.', x: 65.31, y: 53.33 },
         { id: 'unlocked', name: 'Layar Komputer Tidak Terkunci', description: 'Biasakan menekan tombol Win + L saat meninggalkan meja kerja agar tidak diakses orang asing.', x: 50.00, y: 36.67 },
         { id: 'usb', name: 'USB Flashdisk Asing Tercolok', description: 'Mencolokkan flashdisk sembarangan berisiko menyebarkan virus atau malware mata-mata.', x: 71.88, y: 76.89 },
-        { id: 'papers', name: 'Dokumen NIK Warga Terbuka', description: 'Dokumen kertas berisi NIK warga harus dirapikan dan disimpan di laci terkunci agar tidak disalahgunakan.', x: 21.25, y: 82.22 }
+        { id: 'papers', name: 'Dokumen NIK Terbuka', description: 'Dokumen kertas berisi NIK harus dirapikan dan disimpan di laci terkunci agar tidak disalahgunakan.', x: 21.25, y: 82.22 }
       ]
     });
   } else if (type === 'emailPhishing') {
@@ -1996,11 +1996,11 @@ function addBlock(type) {
       initialNode: 'start',
       nodes: {
         'start': {
-          attackerText: 'Halo! Saya kurir pengantar paket. Ada dokumen penting yang harus ditandatangani kepala desa segera, boleh saya langsung masuk ke ruang kerja beliau?',
+          attackerText: 'Halo! Saya kurir pengantar paket. Ada dokumen penting yang harus ditandatangani pimpinan segera, boleh saya langsung masuk ke ruang kerja beliau?',
           avatar: 'delivery',
           choices: [
             { text: 'Oh tentu, silakan langsung masuk saja, pintunya di ujung lorong.', nextNode: 'fail_unauthorized', riskChange: 40, feedback: 'Anda membiarkan orang asing masuk tanpa izin!' },
-            { text: 'Mohon maaf, Anda harus menunggu di lobi sementara saya konfirmasi ke sekretaris desa terlebih dahulu.', nextNode: 'ask_id', riskChange: -10, feedback: 'Langkah yang baik! Mengurangi risiko akses tanpa izin.' },
+            { text: 'Mohon maaf, Anda harus menunggu di lobi sementara saya konfirmasi ke bagian administrasi terlebih dahulu.', nextNode: 'ask_id', riskChange: -10, feedback: 'Langkah yang baik! Mengurangi risiko akses tanpa izin.' },
             { text: 'Beliau sedang sibuk. Taruh saja dokumennya di meja saya, biar saya yang tanda tangani.', nextNode: 'accept_package', riskChange: 10, feedback: 'Cukup aman, tetapi pastikan identitas dokumen valid.' }
           ]
         },
@@ -2010,7 +2010,7 @@ function addBlock(type) {
           choices: [
             { text: 'Baiklah, silakan masuk ke lobi dalam agar cepat selesai.', nextNode: 'fail_unauthorized', riskChange: 30, feedback: 'Mendesak bukan alasan untuk melanggar prosedur!' },
             { text: 'Prosedur kami tetap mengharuskan verifikasi kartu identitas dan pencatatan kunjungan. Silakan tunjukkan tanda pengenal Anda.', nextNode: 'success_verified', riskChange: -20, feedback: 'Sangat bagus! Anda teguh mematuhi prosedur keamanan.' },
-            { text: 'Ya sudah, berikan dokumennya di sini, saya panggilkan sekretaris desa ke depan.', nextNode: 'success_verified', riskChange: 0, feedback: 'Cukup baik untuk menjaga keamanan fisik.' }
+            { text: 'Ya sudah, berikan dokumennya di sini, saya panggilkan bagian administrasi ke depan.', nextNode: 'success_verified', riskChange: 0, feedback: 'Cukup baik untuk menjaga keamanan fisik.' }
           ]
         },
         'fail_unauthorized': {
@@ -2052,7 +2052,7 @@ function addBlock(type) {
       labels: { swipeLeft: 'Swipe Left (Safe)', swipeRight: 'Swipe Right (Suspicious)', correct: 'Correct!', incorrect: 'Incorrect', endTitle: 'Deck Completed!' },
       description: 'Geser kartu ke KIRI untuk (Aman) atau ke KANAN untuk (Mencurigakan).',
       cards: [
-        { id: 'c_1', text: 'Email dari direktur utama meminta transfer uang mendesak menggunakan email personal gratis (@gmail.com).', isSuspicious: true, explanation: 'Mencurigakan! Pejabat resmi tidak menggunakan email pribadi untuk urusan kedinasan sensitif.' },
+        { id: 'c_1', text: 'Email dari direktur utama meminta transfer uang mendesak menggunakan email personal gratis (@gmail.com).', isSuspicious: true, explanation: 'Mencurigakan! Pejabat resmi tidak menggunakan email pribadi untuk urusan pekerjaan sensitif.' },
         { id: 'c_2', text: 'Pesan WhatsApp dari rekan kerja mengonfirmasi link rapat koordinasi Zoom dengan domain resmi zoom.us.', isSuspicious: false, explanation: 'Aman! Domain resmi zoom.us valid dan berasal dari kontak yang sudah dikenal.' }
       ]
     });
@@ -2074,13 +2074,13 @@ function addBlock(type) {
       labels: { checkBtn: 'Check Answers', resetBtn: 'Reset', unassigned: 'Unassigned Items', correct: 'Correct', incorrect: 'Incorrect' },
       description: 'Tarik setiap item di bawah ini ke dalam kategori yang tepat.',
       categories: [
-        { id: 'cat_1', name: 'Aset Desa' },
+        { id: 'cat_1', name: 'Aset Perusahaan' },
         { id: 'cat_2', name: 'Aset Pribadi' }
       ],
       items: [
-        { id: 'item_1', text: 'Mobil Dinas Ambulans Desa', correctCategoryId: 'cat_1', explanation: 'Ambulans desa dibeli menggunakan APBDesa untuk kepentingan umum warga desa.' },
-        { id: 'item_2', text: 'Handphone Pribadi Sekretaris Desa', correctCategoryId: 'cat_2', explanation: 'Barang milik pribadi staf desa bukan merupakan aset kedinasan.' },
-        { id: 'item_3', text: 'Laptop Operasional Kantor Desa', correctCategoryId: 'cat_1', explanation: 'Laptop dinas adalah inventaris kantor untuk mempermudah administrasi pelayanan.' }
+        { id: 'item_1', text: 'Mobil Operasional', correctCategoryId: 'cat_1', explanation: 'Mobil operasional dibeli menggunakan anggaran untuk kepentingan pekerjaan.' },
+        { id: 'item_2', text: 'Handphone Pribadi Karyawan', correctCategoryId: 'cat_2', explanation: 'Barang milik pribadi karyawan bukan merupakan aset kedinasan.' },
+        { id: 'item_3', text: 'Laptop Operasional Kantor', correctCategoryId: 'cat_1', explanation: 'Laptop dinas adalah inventaris kantor untuk mempermudah administrasi pelayanan.' }
       ]
     });
   } else if (type === 'multiMeterScenario') {
@@ -2088,25 +2088,25 @@ function addBlock(type) {
       type: 'multiMeterScenario',
       title: 'Branching Management Scenario',
       labels: { restartBtn: 'Restart Scenario' },
-      description: 'Ambil keputusan kepemimpinan yang tepat. Pilihan Anda akan memengaruhi Kepuasan Warga, Anggaran Desa, dan Kinerja Staf.',
+      description: 'Ambil keputusan kepemimpinan yang tepat. Pilihan Anda akan memengaruhi Kepuasan Pelanggan, Keuangan, dan Kinerja Staf.',
       initialNode: 'start',
       meters: [
-        { id: 'm1', label: 'Kepuasan Warga', value: 50, color: '#10b981' },
-        { id: 'm2', label: 'Anggaran Desa', value: 70, color: '#f59e0b' },
+        { id: 'm1', label: 'Kepuasan Pelanggan', value: 50, color: '#10b981' },
+        { id: 'm2', label: 'Keuangan', value: 70, color: '#f59e0b' },
         { id: 'm3', label: 'Kinerja Staf', value: 60, color: '#3b82f6' }
       ],
       nodes: {
         'start': {
-          promptText: 'Warga mengeluhkan antrean pengurusan KTP yang sangat lambat karena kurangnya petugas loket. Apa tindakan Anda?',
+          promptText: 'Pelanggan mengeluhkan layanan yang lambat karena kurangnya staf. Apa tindakan Anda?',
           avatar: 'leader',
           choices: [
-            { text: 'Rekrut staf loket tambahan menggunakan dana tak terduga.', nextNode: 'node_rekrut', changes: { m1: 30, m2: -30, m3: 10 }, feedback: 'Kepuasan warga meningkat tajam, namun anggaran desa berkurang secara signifikan.' },
+            { text: 'Rekrut staf loket tambahan menggunakan dana tak terduga.', nextNode: 'node_rekrut', changes: { m1: 30, m2: -30, m3: 10 }, feedback: 'Kepuasan pelanggan meningkat tajam, namun keuangan berkurang secara signifikan.' },
             { text: 'Alihkan staf administrasi internal untuk membantu loket pada jam sibuk.', nextNode: 'node_internal', changes: { m1: 15, m2: 0, m3: -20 }, feedback: 'Solusi hemat anggaran, tetapi beban kerja staf bertambah menyebabkan moral kinerja menurun.' },
-            { text: 'Gunakan sistem antrean online mandiri untuk mengurangi antrean fisik.', nextNode: 'node_digital', changes: { m1: 25, m2: -15, m3: 15 }, feedback: 'Langkah digitalisasi yang efisien dengan anggaran sedang dan kepuasan warga yang solid!' }
+            { text: 'Gunakan sistem antrean online mandiri untuk mengurangi antrean fisik.', nextNode: 'node_digital', changes: { m1: 25, m2: -15, m3: 15 }, feedback: 'Langkah digitalisasi yang efisien dengan anggaran sedang dan kepuasan pelanggan yang solid!' }
           ]
         },
         'node_rekrut': {
-          promptText: 'Petugas baru telah bekerja, warga senang antrean cepat. Namun anggaran menipis, membatasi program lainnya.',
+          promptText: 'Petugas baru telah bekerja, pelanggan senang layanan cepat. Namun anggaran menipis, membatasi program lainnya.',
           avatar: 'leader_worried',
           isEnd: true,
           isWin: true
@@ -2118,7 +2118,7 @@ function addBlock(type) {
           isWin: false
         },
         'node_digital': {
-          promptText: 'Sistem online berjalan lancar. Warga mengapresiasi inovasi digital pelayanan desa!',
+          promptText: 'Sistem online berjalan lancar. Pelanggan mengapresiasi inovasi digital pelayanan!',
           avatar: 'leader_happy',
           isEnd: true,
           isWin: true
@@ -2154,9 +2154,9 @@ function addBlock(type) {
       title: 'Memory Pair Matching Game',
       description: 'Temukan pasangan kartu yang cocok antara Istilah dan Definisinya.',
       pairs: [
-        { id: 'pair_1', term: 'APBD', definition: 'Anggaran Pendapatan dan Belanja Daerah' },
-        { id: 'pair_2', term: 'BPD', definition: 'Badan Permusyawaratan Desa' },
-        { id: 'pair_3', term: 'Musrenbang', definition: 'Musyawarah Perencanaan Pembangunan' }
+        { id: 'pair_1', term: 'Phishing', definition: 'Upaya penipuan online melalui pesan palsu' },
+        { id: 'pair_2', term: 'Malware', definition: 'Perangkat lunak berbahaya' },
+        { id: 'pair_3', term: 'Ransomware', definition: 'Virus penyandera data untuk tebusan' }
       ]
     });
   }
