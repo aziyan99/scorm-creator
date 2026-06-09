@@ -1,4 +1,4 @@
-/* Minimal Creator Workspace Styles helper */
+/* Workspace Resizers */
 .resizer {
   cursor: col-resize;
   user-select: none;
@@ -7,4 +7,46 @@
 .resizer-h {
   cursor: row-resize;
   user-select: none;
+}
+
+/* Modal Tab Navigation Buttons */
+.modal-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #475569;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+.modal-tab-btn:hover {
+  background-color: #f1f5f9;
+  color: #1e293b;
+}
+.modal-tab-btn.active {
+  background-color: #e0e7ff;
+  color: #4f46e5;
+}
+
+/* Custom Scrollbars */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
